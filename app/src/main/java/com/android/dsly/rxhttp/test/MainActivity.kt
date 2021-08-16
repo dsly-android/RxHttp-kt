@@ -48,135 +48,81 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun click1(view: View) {
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             val result = RxHttp.get("api/data/Android/10/1")
                 .toStr().retry(2).await()
             LogUtils.i(result)
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click2(view: View) {
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             val result = RxApiopenHttp.get("getJoke")
                 .toStr().retry(2).await()
             LogUtils.i(result)
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click3(view: View) {
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             val result = RxHttp.postForm("http://t.xinhuo.com/index.php/Api/Pic/uploadPic")
                 .addFile("aaa", "/storage/emulated/0/configmanager.json")
                 .toStr().retry(2).await()
             LogUtils.i(result)
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click5(view: View) {
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             val result = RxApiopenHttp.get("getJoke")
                 .setCacheMode(CacheMode.ONLY_NETWORK)
                 .toStr().retry(2).await()
             LogUtils.i(result)
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click6(view: View) {
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             val result = RxApiopenHttp.get("getJoke")
                 .setCacheMode(CacheMode.REQUEST_NETWORK_FAILED_READ_CACHE)
                 .toStr().retry(2).await()
             LogUtils.i(result)
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click7(view: View) {
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             val result = RxApiopenHttp.get("getJoke")
                 .setCacheMode(CacheMode.READ_CACHE_FAILED_REQUEST_NETWORK)
                 .toStr().retry(2).await()
             LogUtils.i(result)
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click8(view: View) {
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             val result = RxApiopenHttp.get("getJoke")
                 .setCacheMode(CacheMode.ONLY_CACHE)
                 .toStr().retry(2).await()
             LogUtils.i("click81")
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
-        rxLifeScope.launch({
+        }
+        viewModel.launch(true, true) {
             val result = RxApiopenHttp.get("getJoke")
                 .setCacheMode(CacheMode.NETWORK_SUCCESS_WRITE_CACHE)
                 .toStr().retry(2).await()
             LogUtils.i("click82")
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click10(view: View) {
         val file = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "aaa.apk")
-        rxLifeScope.launch({
+        viewModel.launch(true, true) {
             RxHttp.get("https://34463b61b3ace6b08aa8d549200b179c.dlied1.cdntips.net/imtt.dd.qq.com/16891/apk/CD08ABAE3EEB07AE136108D5EA708E31.apk?mkey=5fdc461b1b9af0bb&f=1ea1&fsname=com.xiachufang_7.6.8_606.apk&csr=1bbd&cip=27.154.214.78&proto=https")
                 .toDownload(file.toString(), Dispatchers.Main) {
                     ToastUtils.showLong(it.progress.toString())
                 }
                 .await()
-        }, {
-            ToastUtils.showLong(it.errorMsg)
-        }, {
-            viewModel.setShowDialog(true)
-        }, {
-            viewModel.setShowDialog(false)
-        })
+        }
     }
 
     fun click11(view: View) {
@@ -193,7 +139,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun click12(view: View) {
-        var i : Int = 1
+        var i: Int = 1
         rxLifeScope.launch {
             val result = RxHttp.get("api/data/Android/10/1")
                 .toStr().repeat(10, 1000) {
